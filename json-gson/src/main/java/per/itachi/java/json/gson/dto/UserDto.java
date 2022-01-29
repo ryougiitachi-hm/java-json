@@ -12,4 +12,6 @@ public class UserDto {
     private String firstName;
 
     private int height;
+
+    private byte[] data;
 }
