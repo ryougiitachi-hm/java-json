@@ -2,9 +2,15 @@ package per.itachi.java.json.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
+import per.itachi.java.json.jackson.entity.Order;
 
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
 public class Entry {
@@ -18,11 +24,10 @@ public class Entry {
 
     }
 
-    private static void testBytes(ObjectMapper objectMapper) {
+//    private static void testBytes(ObjectMapper objectMapper) {
 //        testBase64(objectMapper);
-        testBytes(objectMapper);
-
-    }
+//        testBytes(objectMapper);
+//    }
 
     private static void testBase64(ObjectMapper objectMapper) {
         byte[] bytesDocumentData = new byte[10];
