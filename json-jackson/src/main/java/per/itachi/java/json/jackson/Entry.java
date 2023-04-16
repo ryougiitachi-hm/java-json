@@ -2,13 +2,15 @@ package per.itachi.java.json.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import java.util.Base64;
-import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 import lombok.extern.slf4j.Slf4j;
 import per.itachi.java.json.jackson.entity.Order;
+
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Slf4j
 public class Entry {
@@ -22,7 +24,12 @@ public class Entry {
 
     }
 
-    private static void testBytes(ObjectMapper objectMapper) {
+//    private static void testBytes(ObjectMapper objectMapper) {
+//        testBase64(objectMapper);
+//        testBytes(objectMapper);
+//    }
+
+    private static void testBase64(ObjectMapper objectMapper) {
         byte[] bytesDocumentData = new byte[10];
         try {
             byte[] bytesResult = objectMapper.writeValueAsBytes(bytesDocumentData);
@@ -44,6 +51,20 @@ public class Entry {
             log.info("The result of json is {}. ", json);
             order = objectMapper.readValue(json, Order.class);
             log.info("The result of Object is {}. ", order);
+        }
+        catch (JsonProcessingException e) {
+            log.error("", e);
+        }
+    }
+
+    private static void testBytes(ObjectMapper objectMapper) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("content", new byte[10]);
+        map.put("code", 200);
+        try {
+            // byte[] will be converted as base64 string automatically.
+            String strJson = objectMapper.writeValueAsString(map);
+            log.info("strJson is {}", strJson);
         }
         catch (JsonProcessingException e) {
             log.error("", e);
